@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [playing, setPlaying] = useState(false)
+  const [count, setCount] = useState(0)
+  const [bpm, setBpm] = useState(100)
+  const [beatsPerMeasure, setBeatsPerMeasure] = useState(4)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="metronome">
+      <div className="bpm-slider">
+        <div>{bpm} BPM</div>
+        <input type="range" min="60" max="240" value={bpm} />
+      </div>
+      <button>{playing ? "Stop" : "Start"}</button>
     </div>
   );
 }

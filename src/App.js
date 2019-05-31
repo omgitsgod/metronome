@@ -16,7 +16,7 @@ function App() {
   const handleBpmChange = (e) => {
     if (playing) {
       clearInterval(timer)
-      setTimer(setInterval(this.playClick, (60 / bpm) * 1000))
+      setTimer(setInterval(playClick, (60 / bpm) * 1000))
       setCount(0);
       setBpm(e.target.value)
     } else {

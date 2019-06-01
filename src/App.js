@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import click1 from './click1.wav';
 import click2 from './click2.wav';
 import './App.css';
-import gnome from './gnome.png' 
+import gnome from './gnome.png'
 
 function App() {
   const [playing, setPlaying] = useState(false)
@@ -54,7 +54,7 @@ function App() {
   } else {
     clicky1.play();
   }
-    setCount((count+1)/beatsPerMeasure)
+    setCount((count+1) % beatsPerMeasure)
   }
   return (
     <div className="metronome">

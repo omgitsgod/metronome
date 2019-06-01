@@ -57,6 +57,7 @@ function App() {
   }
   return (
     <div className="metronome">
+      <h1>Metrognome</h1>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />

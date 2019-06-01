@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import click1 from './click1.wav';
 import click2 from './click2.wav';
 import './App.css';
@@ -6,12 +6,14 @@ import './App.css';
 function App() {
   const [playing, setPlaying] = useState(false)
   const [count, setCount] = useState(0)
-  const [bpm, setBpm] = useState(100)
+  const [bpm, setBpm] = useState(localStorage.getItem('bpm') || 100)
   const [beatsPerMeasure, setBeatsPerMeasure] = useState(4)
   const clicky1 = new Audio(click1);
   const clicky2 = new Audio(click2);
   const [timer, setTimer] = useState(0)
-
+  useEffect(()=> {
+    localStorage.setItem('bpm', bpm)
+  }, [bpm])
 
   const handleBpmChange = (e) => {
     if (playing) {

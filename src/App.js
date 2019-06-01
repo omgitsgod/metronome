@@ -41,6 +41,12 @@ function App() {
       console.log(timer);
     }
   }
+  const reset = () => {
+    setBpm(100)
+    setCount(0)
+    setPlaying(false)
+    clearInterval(timer)
+  }
   const playClick = () => {
     if (count % beatsPerMeasure === 0) {
     clicky2.play();
@@ -55,6 +61,7 @@ function App() {
         <div>{bpm} BPM</div>
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
+      <button onClick={reset}>Reset</button>
       <button onClick={startStop}>{playing ? "Stop" : "Start"}</button>
     </div>
   );

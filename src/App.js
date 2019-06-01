@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import click1 from './click1.wav';
 import click2 from './click2.wav';
 import './App.css';
+import gnome from './gnome.png' 
 
 function App() {
   const [playing, setPlaying] = useState(false)
@@ -58,6 +59,7 @@ function App() {
   return (
     <div className="metronome">
       <h1>Metrognome</h1>
+      <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />

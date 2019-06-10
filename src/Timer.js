@@ -9,7 +9,9 @@ function Timer(props) {
   }, [])
   setInterval(() => {
   setCountdown(--countdown <= 0 ? 10 : countdown);
-
+  if (countdown === 0) {
+     props.reset()
+  }
 }, 1000);
   return (
     <div id="countdown">

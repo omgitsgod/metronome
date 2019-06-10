@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import Timer from './Timer'
 import click1 from './click1.wav';
 import click2 from './click2.wav';
 import './App.css';

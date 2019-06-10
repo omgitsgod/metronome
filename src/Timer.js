@@ -3,21 +3,22 @@ import gnome from './gnome.png'
 import './App.css';
 
 function Timer(props) {
-  let [countdown, setCountdown] = useState(10)
+  let [countdown, setCountdown] = useState(props.num)
   useEffect(()=> {
     props.startStop()
   }, [])
-  setInterval(() => {
-  setCountdown(--countdown <= 0 ? 10 : countdown);
-  if (countdown === 0) {
-     props.reset()
-  }
+  let x = setInterval(() => {
+  setCountdown(--countdown <= 0 ? 0 : countdown);
 }, 1000);
+  if (countdown === 0) {
+    props.reset()
+    clearInterval(x)
+  }
   return (
     <div id="countdown">
   <div id="countdown-number">{countdown}</div>
   <svg>
-    <circle r="18" cx="20" cy="20"></circle>
+    <circle r="18" cx="20" cy="20" style={{animation: `countdown ${props.num}s linear infinite forwards`}}></circle>
   </svg>
 </div>
   );

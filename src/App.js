@@ -14,6 +14,7 @@ function App() {
   const clicky2 = new Audio(click2);
   const [intTimer, setIntTimer] = useState(0)
   const [timer, setTimer] = useState(false)
+  const [num, setNum] = useState(0)
   useEffect(()=> {
     localStorage.setItem('bpm', bpm)
   }, [bpm])
@@ -58,18 +59,19 @@ function App() {
   }
     setCount((count+1) % beatsPerMeasure)
   }
+  console.log(num);
   return (
     <div className="metronome">
       <h1>Metrognome</h1>
       <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
-        {timer ? <Timer startStop={startStop} reset={reset}/> : null}
+        {timer ? <div><p>{num} seconds({num/60} minutes)</p><button onClick={reset}>Reset</button><button>Start</button> <br/><input type="range" min="0" max="600" value={num} onChange={(e) => {setNum(e.target.value)}} /> </div>: null}
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
       <button onClick={()=>{setTimer(!timer)}}>10(s) Timer</button>
-      <button onClick={reset}>Reset</button>
-      <button onClick={startStop}>{playing ? "Stop" : "Start"}</button>
+      {!timer ? <button onClick={reset}>Reset</button> : null}
+      {!timer ? <button onClick={startStop}>{playing ? "Stop" : "Start"}</button> : null}
     </div>
   );
 }

@@ -74,7 +74,6 @@ svg circle {
   stroke-width: 2px;
   stroke: #1D5784;
   fill: none;
-  animation: countdown 10s linear infinite forwards;
 }
 
 @keyframes countdown {

@@ -12,15 +12,16 @@ function App() {
   const [beatsPerMeasure, setBeatsPerMeasure] = useState(4)
   const clicky1 = new Audio(click1);
   const clicky2 = new Audio(click2);
-  const [timer, setTimer] = useState(0)
+  const [intTimer, setIntTimer] = useState(0)
+  const [timer, setTimer] = useState(false)
   useEffect(()=> {
     localStorage.setItem('bpm', bpm)
   }, [bpm])
 
   const handleBpmChange = (e) => {
     if (playing) {
-      clearInterval(timer)
-      setTimer(setInterval(playClick, (60 / bpm) * 1000))
+      clearInterval(intTimer)
+      setIntTimer(setInterval(playClick, (60 / bpm) * 1000))
       setCount(0);
       setBpm(e.target.value)
     } else {
@@ -30,24 +31,24 @@ function App() {
   const startStop = () => {
 
     if (playing) {
-      clearInterval(timer)
+      clearInterval(intTimer)
       setPlaying(false)
-      console.log(timer);
+      console.log(intTimer);
     } else {
-      setTimer(setInterval(
+      setIntTimer(setInterval(
         playClick, (60 / bpm) * 1000
       ))
       setCount(0)
       setPlaying(true)
       playClick()
-      console.log(timer);
+      console.log(intTimer);
     }
   }
   const reset = () => {
     setBpm(100)
     setCount(0)
     setPlaying(false)
-    clearInterval(timer)
+    clearInterval(intTimer)
   }
   const playClick = () => {
     if (count % beatsPerMeasure === 0) {
@@ -65,9 +66,10 @@ function App() {
         <div>{bpm} BPM</div>
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
+      <button onClick={()=>{setTimer(!timer)}}>10(s) Timer</button>
       <button onClick={reset}>Reset</button>
       <button onClick={startStop}>{playing ? "Stop" : "Start"}</button>
-      <Timer />
+      {timer ? <Timer reset={reset}/> : null}
     </div>
   );
 }

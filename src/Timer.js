@@ -4,8 +4,12 @@ import './App.css';
 
 function Timer(props) {
   let [countdown, setCountdown] = useState(10)
+  useEffect(()=> {
+    props.startStop()
+  }, [])
   setInterval(() => {
   setCountdown(--countdown <= 0 ? 10 : countdown);
+
 }, 1000);
   return (
     <div id="countdown">

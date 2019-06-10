@@ -64,7 +64,7 @@ function App() {
       <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
-        {timer ? <Timer reset={reset}/> : null}
+        {timer ? <Timer startStop={startStop}/> : null}
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
       <button onClick={()=>{setTimer(!timer)}}>10(s) Timer</button>

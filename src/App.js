@@ -15,6 +15,7 @@ function App() {
   const [intTimer, setIntTimer] = useState(0)
   const [timer, setTimer] = useState(false)
   const [num, setNum] = useState(0)
+  const [displayTimer, setDisplayTimer] = useState(false)
   useEffect(()=> {
     localStorage.setItem('bpm', bpm)
   }, [bpm])
@@ -50,6 +51,8 @@ function App() {
     setCount(0)
     setPlaying(false)
     clearInterval(intTimer)
+    setNum(0)
+    setTimer(false)
   }
   const playClick = () => {
     if (count % beatsPerMeasure === 0) {
@@ -66,10 +69,11 @@ function App() {
       <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
-        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button>Start</button> <br/><input type="range" min="0" max="600" value={num} onChange={(e) => {setNum(e.target.value)}} /> </div>: null}
+        {num > 0 ? <Timer num={num}/> : null}
+        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/><input type="range" min="0" max="600" value={num} onChange={(e) => {setNum(e.target.value)}} /> </div>: null}
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
-      <button onClick={()=>{setTimer(!timer)}}>Timer</button>
+      <button  onClick={()=>{setTimer(!timer)}}>Timer</button>
       {!timer ? <button onClick={reset}>Reset</button> : null}
       {!timer ? <button onClick={startStop}>{playing ? "Stop" : "Start"}</button> : null}
     </div>

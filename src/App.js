@@ -64,12 +64,12 @@ function App() {
       <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
+        {timer ? <Timer reset={reset}/> : null}
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
       <button onClick={()=>{setTimer(!timer)}}>10(s) Timer</button>
       <button onClick={reset}>Reset</button>
       <button onClick={startStop}>{playing ? "Stop" : "Start"}</button>
-      {timer ? <Timer reset={reset}/> : null}
     </div>
   );
 }

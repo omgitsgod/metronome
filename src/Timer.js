@@ -3,8 +3,10 @@ import gnome from './gnome.png'
 import './App.css';
 
 function Timer(props) {
-  let countdown=10
-
+  let [countdown, setCountdown] = useState(10)
+  setInterval(() => {
+  setCountdown(--countdown <= 0 ? 10 : countdown);
+}, 1000);
   return (
     <div id="countdown">
   <div id="countdown-number">{countdown}</div>

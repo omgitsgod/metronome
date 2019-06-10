@@ -1,37 +1,15 @@
 import React, { useState, useEffect} from 'react';
+import gnome from './gnome.png'
 import './App.css';
 
 function Timer() {
 
   return (
-    <div class="container">
-  <div class="setters">
-    <div class="minutes-set">
-      <button data-setter="minutes-plus">+</button>
-      <button data-setter="minutes-minus">-</button>
-    </div>
-    <div class="seconds-set">
-      <button data-setter="seconds-plus">+</button>
-      <button data-setter="seconds-minus">-</button>
-    </div>
-  </div>
-   <div class="circle">
-      <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-         <g transform="translate(110,110)">
-            <circle r="100" class="e-c-base"/>
-            <g transform="rotate(-90)">
-               <circle r="100" class="e-c-progress"/>
-               <g id="e-pointer">
-                  <circle cx="100" cy="0" r="8" class="e-c-pointer"/>
-               </g>
-            </g>
-         </g>
-      </svg>
-   </div>
-   <div class="controlls">
-      <div class="display-remain-time">01:30</div>
-      <button class="play" id="pause"></button>
-   </div>
+    <div id="countdown">
+  <div id="countdown-number">10</div>
+  <svg>
+    <circle r="18" cx="20" cy="20"></circle>
+  </svg>
 </div>
   );
 }

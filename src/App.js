@@ -67,6 +67,7 @@ function App() {
       </div>
       <button onClick={reset}>Reset</button>
       <button onClick={startStop}>{playing ? "Stop" : "Start"}</button>
+      <Timer />
     </div>
   );
 }

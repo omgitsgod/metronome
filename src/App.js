@@ -41,7 +41,9 @@ function App() {
       console.log(intTimer);
     }
      else {
-      setStartTimer(true)
+      if (num > 0) {
+        setStartTimer(true)
+      }
       setIntTimer(setInterval(
         playClick, (60 / bpm) * 1000
       ))

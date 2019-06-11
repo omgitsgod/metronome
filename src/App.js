@@ -9,13 +9,12 @@ function App() {
   const [playing, setPlaying] = useState(false)
   const [count, setCount] = useState(0)
   const [bpm, setBpm] = useState(localStorage.getItem('bpm') || 100)
-  const [beatsPerMeasure, setBeatsPerMeasure] = useState(4)
   const clicky1 = new Audio(click1);
   const clicky2 = new Audio(click2);
   const [intTimer, setIntTimer] = useState(0)
   const [timer, setTimer] = useState(false)
   const [num, setNum] = useState(0)
-  const [displayTimer, setDisplayTimer] = useState(false)
+  const [startTimer, setStartTimer] = useState(false)
   useEffect(()=> {
     localStorage.setItem('bpm', bpm)
   }, [bpm])
@@ -33,10 +32,16 @@ function App() {
   const startStop = () => {
 
     if (playing) {
+      if (num <= 0) {
+        setStartTimer(false)
+        setTimer(false)
+      }
       clearInterval(intTimer)
       setPlaying(false)
       console.log(intTimer);
-    } else {
+    }
+     else {
+      setStartTimer(true)
       setIntTimer(setInterval(
         playClick, (60 / bpm) * 1000
       ))
@@ -45,7 +50,7 @@ function App() {
       playClick()
       console.log(intTimer);
     }
-  }
+    }
   const reset = () => {
     setBpm(100)
     setCount(0)
@@ -53,15 +58,17 @@ function App() {
     clearInterval(intTimer)
     setNum(0)
     setTimer(false)
+    setStartTimer(false)
   }
   const playClick = () => {
-    if (count % beatsPerMeasure === 0) {
+    if (count % 4 === 0) {
     clicky2.play();
   } else {
     clicky1.play();
   }
-    setCount((count+1) % beatsPerMeasure)
+    setCount((count+1) % 4)
   }
+
   console.log(num);
   return (
     <div className="metronome">
@@ -69,8 +76,9 @@ function App() {
       <img src={gnome} alt="gnome"/>
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
-        {num > 0 ? <Timer num={num}/> : null}
-        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/><input type="range" min="0" max="600" value={num} onChange={(e) => {setNum(e.target.value)}} /> </div>: null}
+        {startTimer ? <Timer num={num} startStop={startStop} reset={reset}/> : null}
+        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/><input type="range" min="0" max="600" value={num} onChange={(e)=>setNum(e.target.value)} /> </div>: null}
+        <br />
         <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
       <button  onClick={()=>{setTimer(!timer)}}>Timer</button>

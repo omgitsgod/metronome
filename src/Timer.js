@@ -1,17 +1,17 @@
 import React, { useState, useEffect} from 'react';
-import gnome from './gnome.png'
 import './App.css';
 
 function Timer(props) {
   let [countdown, setCountdown] = useState(props.num)
   useEffect(()=> {
   //  props.startStop()
-}, )
+
+}, [])
   let x = setInterval(() => {
   setCountdown(--countdown <= 0 ? 0 : countdown);
 }, 1000);
   if (countdown === 0) {
-  //  props.reset()
+    props.reset()
     clearInterval(x)
   }
   return (

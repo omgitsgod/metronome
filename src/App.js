@@ -80,11 +80,12 @@ function App() {
       <div className="bpm-slider">
         <div>{bpm} BPM</div>
         {startTimer ? <Timer num={num} startStop={startStop} reset={reset}/> : null}
-        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/><input type="range" min="0" max="600" value={num} onChange={(e)=>setNum(e.target.value)} /> </div>: null}
+        {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes) Timer</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/></div>: null}
         <br />
         <input className="bpm" name="bpm" type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
+        {timer ? <input className="timer-select" style={{backgroundColor: '#b12929'}} type="range" min="0" max="600" value={num} onChange={(e)=>setNum(e.target.value)} /> : null }
       </div>
-      <button  onClick={()=>{setTimer(!timer)}}>Timer</button>
+      <button className="timer-button" style={{backgroundColor: '#f15e5e'}}  onClick={()=>{setTimer(!timer)}}>Timer</button>
       {!timer ? <button onClick={reset}>Reset</button> : null}
       {!timer ? <button onClick={startStop}>{playing ? "Stop" : "Start"}</button> : null}
     </div>

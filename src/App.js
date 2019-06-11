@@ -36,6 +36,7 @@ function App() {
         setStartTimer(false)
         setTimer(false)
       }
+      setStartTimer(false)
       clearInterval(intTimer)
       setPlaying(false)
       console.log(intTimer);
@@ -81,7 +82,7 @@ function App() {
         {startTimer ? <Timer num={num} startStop={startStop} reset={reset}/> : null}
         {timer ? <div><p>{num} seconds({Math.floor((num/60)*10)/10} minutes)</p><button onClick={reset}>Reset</button><button onClick={startStop}>{playing ? "Stop" : "Start"}</button>  <br/><input type="range" min="0" max="600" value={num} onChange={(e)=>setNum(e.target.value)} /> </div>: null}
         <br />
-        <input type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
+        <input className="bpm" name="bpm" type="range" min="60" max="240" value={bpm} onChange={handleBpmChange} />
       </div>
       <button  onClick={()=>{setTimer(!timer)}}>Timer</button>
       {!timer ? <button onClick={reset}>Reset</button> : null}
